@@ -1,0 +1,386 @@
+-- You can add your own plugins here or in other files in this directory!
+--  I promise not to create any merge conflicts in this directory :)
+--
+-- See the kickstart.nvim README for more information
+--
+-- Set transparent background for FidgetTitle and FidgetTask
+vim.bo.fileformat = 'unix'
+vim.opt.shadafile = 'NONE'
+
+local opt = vim.opt
+
+opt.encoding = 'utf-8'
+-- swapfile off
+opt.swapfile = false
+opt.clipboard = 'unnamedplus'
+opt.termguicolors = true
+opt.showtabline = 0
+
+-- Disable cursor line and column highlight when leaving a window
+vim.api.nvim_create_autocmd('WinLeave', {
+  pattern = '*',
+  callback = function()
+    vim.opt.cursorline = false
+    -- vim.opt.cursorcolumn = false
+  end,
+})
+
+-- Enable cursor line and column highlight when entering a window
+vim.api.nvim_create_autocmd('WinEnter', {
+  pattern = '*',
+  callback = function()
+    vim.opt.cursorline = true
+  end,
+})
+
+-- Disable line numbers in terminal
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = '*',
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+  end,
+})
+
+local function diff_source()
+  local gitsigns = vim.b.gitsigns_status_dict
+  if gitsigns then
+    return {
+      added = gitsigns.added,
+      modified = gitsigns.changed,
+      removed = gitsigns.removed,
+    }
+  end
+end
+
+local function lsp_names()
+  local buf_clients = vim.lsp.buf_get_clients()
+  local buf_ft = vim.bo.filetype
+  if next(buf_clients) == nil then
+    return ' No servers'
+  end
+  local buf_client_names = {}
+
+  for _, client in pairs(buf_clients) do
+    if client.name ~= 'null-ls' then
+      table.insert(buf_client_names, client.name)
+    end
+  end
+
+  local lint_s, lint = pcall(require, 'lint')
+  if lint_s then
+    for ft_k, ft_v in pairs(lint.linters_by_ft) do
+      if type(ft_v) == 'table' then
+        for _, linter in ipairs(ft_v) do
+          if buf_ft == ft_k then
+            table.insert(buf_client_names, linter)
+          end
+        end
+      elseif type(ft_v) == 'string' then
+        if buf_ft == ft_k then
+          table.insert(buf_client_names, ft_v)
+        end
+      end
+    end
+  end
+
+  local ok, conform = pcall(require, 'conform')
+  local formatters = table.concat(conform.formatters_by_ft[vim.bo.filetype], ' ')
+  if ok then
+    for formatter in formatters:gmatch '%w+' do
+      if formatter then
+        table.insert(buf_client_names, formatter)
+      end
+    end
+  end
+
+  local hash = {}
+  local unique_client_names = {}
+
+  for _, v in ipairs(buf_client_names) do
+    if not hash[v] then
+      unique_client_names[#unique_client_names + 1] = v
+      hash[v] = true
+    end
+  end
+  local language_servers = table.concat(unique_client_names, ', ')
+
+  return ' ' .. language_servers
+end
+
+vim.o.laststatus = 3
+
+local mode_map = {
+  ['NORMAL'] = ' ', -- Normal mode
+  ['MORE'] = ' ', -- More mode (pager-like mode)
+  ['CONFIRM'] = ' ', -- Confirm mode (e.g., for certain prompts)
+  ['O-PENDING'] = ' ', -- Operator-pending mode
+  ['V-REPLACE'] = '󰩷 ', -- Virtual replace mode
+  ['REPLACE'] = '󰩷 ', -- Replace mode
+  ['VISUAL'] = '󰩷 ', -- Visual mode
+  ['V-LINE'] = '󰩷 ', -- Visual line mode
+  ['V-BLOCK'] = '󰩷 ', -- Visual block mode
+  ['SELECT'] = '󰩷 ', -- Select mode
+  ['S-LINE'] = '󰩷 ', -- Select line mode
+  ['S-BLOCK'] = '󰩷 ', -- Select block mode
+  ['INSERT'] = ' ', -- Insert mode
+  ['COMMAND'] = ' ', -- Command-line editing mode
+  ['EX'] = ' ', -- Ex mode (extended command-line mode)
+  ['SHELL'] = ' ', -- Shell mode
+  ['TERMINAL'] = ' ', -- Terminal mode
+}
+
+return {
+  {
+    'luukvbaal/statuscol.nvim',
+  },
+  {
+    'iamcco/markdown-preview.nvim',
+    cmd = { 'MarkdownPreviewToggle', 'MarkdownPreview', 'MarkdownPreviewStop' },
+    build = 'cd app && yarn install',
+    init = function()
+      vim.g.mkdp_filetypes = { 'markdown' }
+    end,
+    ft = { 'markdown' },
+  },
+  {
+    'danymat/neogen',
+    config = true,
+  },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require('lualine').setup {
+        options = {
+          icons_enabled = true,
+          theme = (string.find(vim.g.colors_name, 'lackluster') and 'lackluster') or 'auto',
+          -- section_separators = { left = '', right = '' },
+          section_separators = { left = '', right = '' },
+          component_separators = { left = '', right = '' },
+          disabled_filetypes = {
+            statusline = {},
+            winbar = {},
+          },
+          ignore_focus = {},
+          always_show_tabline = false,
+          always_divide_middle = true,
+          globalstatus = true,
+          refresh = {
+            statusline = 1000,
+            tabline = 1000,
+            winbar = 1000,
+          },
+        },
+        sections = {
+          -- lualine_a = {
+          --   function()
+          --     return mode_map[vim.api.nvim_get_mode().mode] or '__'
+          --   end,
+          -- },
+          lualine_a = {
+            {
+              'mode',
+              color = { gui = 'none' },
+              -- separator = { left = '', right = '' },
+              fmt = function(res)
+                return mode_map[res] or '__'
+              end,
+            },
+          },
+          lualine_b = {
+            {
+              'tabs',
+              symbols = {
+                modified = '  ', -- Text to show when the file is modified.
+              },
+              -- separator = { right = '' },
+              tabs_color = {
+                -- Same values as the general color option can be used here.
+                active = 'StatusLine', -- Color for active tab.
+                inactive = 'StatusLineNC', -- Color for inactive tab.
+              },
+            },
+          },
+          lualine_c = {
+            {
+              'windows',
+              -- separator = { right = '' },
+              windows_color = {
+                -- Same values as the general color option can be used here.
+                active = 'StatusLine', -- Color for active tab.
+                inactive = 'StatusLineNC', -- Color for inactive tab.
+              },
+            },
+          },
+          lualine_x = {
+            {
+              lsp_names,
+              separator = '·',
+            },
+            {
+              'diff',
+              separator = '·',
+              symbols = { added = ' ', modified = ' ', removed = '󰍷 ' },
+              source = diff_source,
+            },
+            {
+              'diagnostics',
+              symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+            },
+          },
+          lualine_y = {
+            {
+              'b:gitsigns_head',
+              icon = { '' },
+              color = 'StatusLineNC',
+              -- separator = { left = '' }
+            },
+            {
+              'encoding',
+              -- separator = { left = '' },
+            },
+            {
+              'filetype',
+              -- separator = { left = '' },
+              color = 'StatusLineNC',
+            },
+          },
+
+          lualine_z = {
+            {
+              'fileformat',
+              symbols = {
+                unix = '', -- e712
+                dos = '', -- e70f
+                mac = '', -- e711
+              },
+              -- separator = { right = '', left = '' },
+            },
+          },
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {},
+        },
+        tabline = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {},
+        },
+        winbar = {},
+        inactive_winbar = {},
+      }
+    end,
+  },
+  {
+    'scottmckendry/cyberdream.nvim',
+    lazy = false,
+    priority = 1000,
+    init = function()
+      vim.cmd.colorscheme 'cyberdream'
+    end,
+  },
+  {
+    'folke/noice.nvim',
+    event = 'VeryLazy',
+    opts = {
+      -- add any options here
+      views = {
+        mini = {
+          win_options = {
+            winblend = 0,
+          },
+        },
+      },
+    },
+    dependencies = {
+      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+      'MunifTanjim/nui.nvim',
+      -- OPTIONAL:
+      --   `nvim-notify` is only needed, if you want to use the notification view.
+      --   If not available, we use `mini` as the fallback
+      -- {
+      --   'rcarriga/nvim-notify',
+      -- },
+    },
+  },
+  {
+    'shellRaining/hlchunk.nvim',
+    event = { 'BufReadPre', 'BufNewFile' },
+  },
+  {
+    'stevearc/aerial.nvim',
+    opts = {
+      on_attach = function(bufnr)
+        -- Jump forwards/backwards with '{' and '}'
+        vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', { buffer = bufnr })
+        vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', { buffer = bufnr })
+      end,
+    },
+    -- Optional dependencies
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-tree/nvim-web-devicons',
+    },
+  },
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      keymaps = {
+        ['<C-v>'] = { 'actions.select', opts = { vertical = true }, desc = 'Open the entry in a vertical split' },
+        ['<C-h>'] = { 'actions.select', opts = { horizontal = true }, desc = 'Open the entry in a horizontal split' },
+        ['<esc>'] = 'actions.close',
+        ['<C-[>'] = 'actions.close',
+      },
+    },
+    -- Optional dependencies
+    -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+  },
+  {
+    'goolord/alpha-nvim',
+    dependencies = {
+      'echasnovski/mini.icons',
+      'nvim-lua/plenary.nvim',
+    },
+  },
+  {
+    'smoka7/hop.nvim',
+    version = '*',
+    opts = {
+      keys = 'etovxqpdygfblzhckisuran',
+    },
+  },
+  {
+    'eandrju/cellular-automaton.nvim',
+  },
+  {
+    'pogyomo/winresize.nvim',
+  },
+  {
+    'pogyomo/submode.nvim',
+    lazy = true,
+  },
+  {
+    'petertriho/nvim-scrollbar',
+    config = function()
+      require('gitsigns').setup()
+      require('scrollbar.handlers.gitsigns').setup()
+    end,
+  },
+  {
+    'marcussimonsen/let-it-snow.nvim',
+    cmd = 'LetItSnow', -- Wait with loading until command is run
+    opts = {},
+  },
+}

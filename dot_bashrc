@@ -113,7 +113,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
-if [ -d "$HOME/squashfs-root/usr/bin" ]; then
-  export PATH="$HOME/squashfs-root/usr/bin:$PATH"
-fi
 export PATH="$HOME/.local/bin:$PATH"
