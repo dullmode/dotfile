@@ -4,9 +4,17 @@
 My dotfiles managed by [chezmoi](https://chezmoi.io) ⚡
 
 ## Requirements ✅
-- 💻 chezmoi  
-- 🎨 nvim (and symbolic to ./local/bin)
-- 🚀 volta()
+- 💻 **chezmoi**
+  - Detailed description is in Usage
+- 🎨 **nvim**
+  - Download nightly from site and create symbolic to local/bin
+  - gcc for nvim-treesitter
+  - `sudo apt-get install build-essential`
+- 🚀 **volta**
+  - node
+  - `volta install node`
+  - claude
+  - `npm install -g @anthropic-ai/claude-code`
 
 ## Not requirements ⚠️
 - 🎨 nvim config file
