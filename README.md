@@ -10,6 +10,8 @@ My dotfiles managed by [chezmoi](https://chezmoi.io) ⚡
   - Download nightly from site and create symbolic to local/bin
   - gcc for nvim-treesitter
   - `sudo apt-get install build-essential`
+  - venv for mason (python)
+  - `sudo apt install -y python3-venv`
 - 🚀 **volta**
   - node
   - `volta install node`
@@ -20,6 +22,15 @@ My dotfiles managed by [chezmoi](https://chezmoi.io) ⚡
 - 🎨 nvim config file
 - 🖥️ bashrc
 - 🔎 rg
+- 🔎 zk
+
+## after nvim setting reccomandtion
+use mason and install these lsp, formatter, and linter
+ - python
+ - zk
+
+init zk
+ - zk init notes
 
 ## Usage 🔧  
 ```bash

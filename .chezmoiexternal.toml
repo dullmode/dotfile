@@ -7,4 +7,12 @@
     command = "tar"
     args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "ripgrep-{{ (gitHubLatestRelease "BurntSushi/ripgrep").TagName }}-x86_64-unknown-linux-musl/rg"]
 
+[".local/bin/zk"]
+  type = "file"
+  url = "https://github.com/zk-org/zk/releases/download/{{ (gitHubLatestRelease "zk-org/zk").TagName }}/zk-{{ (gitHubLatestRelease "zk-org/zk").TagName }}-linux-amd64.tar.gz"
+  executable = true
+  [".local/bin/zk".filter]
+    command = "tar"
+    args = ["--extract", "--file", "/dev/stdin", "--gzip", "--to-stdout", "zk"]
+
 {{ end }}
