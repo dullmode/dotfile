@@ -17,6 +17,8 @@ My dotfiles managed by [chezmoi](https://chezmoi.io) ⚡
   - `volta install node`
   - claude
   - `npm install -g @anthropic-ai/claude-code`
+  - markdown
+  - `dull@AX24026:~/.local/share/nvim/lazy/markdown-preview.nvim$ npm install`
 
 ## Not requirements ⚠️
 - 🎨 nvim config file
