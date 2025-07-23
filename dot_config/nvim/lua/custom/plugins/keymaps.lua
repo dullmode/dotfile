@@ -73,15 +73,7 @@ keymap.set("n", "<leader>wtt", function()
   vim.cmd("tabnew | terminal")
 end, { noremap = true, silent = true, desc = "in new [T]ab" })
 
-wk.add {
-  { '<leader>wx', group = '[X] mode' },
-}
--- cellular-automation
-keymap.set('n', '<leader>wxr', '<cmd>CellularAutomaton make_it_rain<CR>', { noremap = true, silent = true, desc = '[R]ain' })
-keymap.set('n', '<leader>wxs', '<cmd>LetItSnow<CR>', { noremap = true, silent = true, desc = '[S]now' })
-
 -- winresize
-
 wk.add {
   { '<leader>wr', group = '[R]esize' },
 }
@@ -133,5 +125,10 @@ vim.api.nvim_set_keymap("n", "<leader>dt", "<Cmd>ZkTags<CR>", opts)
 vim.api.nvim_set_keymap("n", "<leader>df", "<Cmd>ZkNotes { sort = { 'modified' }, match = { vim.fn.input('Search: ') } }<CR>", opts)
 -- Search for the notes matching the current visual selection.
 vim.api.nvim_set_keymap("v", "<leader>df", ":'<,'>ZkMatch<CR>", opts)
+
+-- claude code
+wk.add {
+  { '<leader>a', group = '[A]i claude code' },
+}
 
 return {}

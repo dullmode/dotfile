@@ -362,26 +362,11 @@ return {
     },
   },
   {
-    'eandrju/cellular-automaton.nvim',
-  },
-  {
     'pogyomo/winresize.nvim',
   },
   {
     'pogyomo/submode.nvim',
     lazy = true,
-  },
-  {
-    'petertriho/nvim-scrollbar',
-    config = function()
-      require('gitsigns').setup()
-      require('scrollbar.handlers.gitsigns').setup()
-    end,
-  },
-  {
-    'marcussimonsen/let-it-snow.nvim',
-    cmd = 'LetItSnow', -- Wait with loading until command is run
-    opts = {},
   },
   {
     "coder/claudecode.nvim",
