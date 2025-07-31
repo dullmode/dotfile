@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      // ファイル操作
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(pwd:*)",
+      "Bash(cd:*)",
+      
+      // 検索系
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+    ],
+    "deny": []
+  }
+}
