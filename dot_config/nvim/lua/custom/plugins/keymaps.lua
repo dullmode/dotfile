@@ -32,7 +32,7 @@ keymap.set('n', '<leader>lm', ':Telescope noice<CR>', { desc = '[M]essage log' }
 keymap.set('n', '<leader>wc', ':Telescope colorscheme<CR>', { desc = '[C]olorscheme' })
 
 -- hop
-keymap.set('', 'M', ':HopWordMW<CR>', { desc = '[M]ove to word' })
+-- keymap.set('', 'M', ':HopWordMW<CR>', { desc = '[M]ove to word' })
 
 -- neogen
 keymap.set('n', '<leader>cd', ':Neogen<CR>', { desc = 'Add [D]ocument' })

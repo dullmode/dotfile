@@ -111,24 +111,25 @@ end
 vim.o.laststatus = 3
 
 local mode_map = {
-  ['NORMAL'] = ' ', -- Normal mode
-  ['MORE'] = ' ', -- More mode (pager-like mode)
-  ['CONFIRM'] = ' ', -- Confirm mode (e.g., for certain prompts)
-  ['O-PENDING'] = ' ', -- Operator-pending mode
+  ['NORMAL'] = 'NORMAL', -- Normal mode
+  ['MORE'] = 'MORE', -- More mode (pager-like mode)
+  ['CONFIRM'] = 'CONFIRM', -- Confirm mode (e.g., for certain prompts)
+  ['O-PENDING'] = 'O-PENDING', -- Operator-pending mode
   ['V-REPLACE'] = '󰩷 ', -- Virtual replace mode
-  ['REPLACE'] = '󰩷 ', -- Replace mode
-  ['VISUAL'] = '󰩷 ', -- Visual mode
-  ['V-LINE'] = '󰩷 ', -- Visual line mode
-  ['V-BLOCK'] = '󰩷 ', -- Visual block mode
-  ['SELECT'] = '󰩷 ', -- Select mode
-  ['S-LINE'] = '󰩷 ', -- Select line mode
-  ['S-BLOCK'] = '󰩷 ', -- Select block mode
-  ['INSERT'] = ' ', -- Insert mode
-  ['COMMAND'] = ' ', -- Command-line editing mode
-  ['EX'] = ' ', -- Ex mode (extended command-line mode)
-  ['SHELL'] = ' ', -- Shell mode
-  ['TERMINAL'] = ' ', -- Terminal mode
+  ['REPLACE'] = 'REPLACE', -- Replace mode
+  ['VISUAL'] = 'VISUAL', -- Visual mode
+  ['V-LINE'] = 'V-LINE', -- Visual line mode
+  ['V-BLOCK'] = 'V-BLOCK', -- Visual block mode
+  ['SELECT'] = 'SELECT', -- Select mode
+  ['S-LINE'] = 'S-LINE', -- Select line mode
+  ['S-BLOCK'] = 'S-BLOCK', -- Select block mode
+  ['INSERT'] = 'INSERT', -- Insert mode
+  ['COMMAND'] = 'COMMAND', -- Command-line editing mode
+  ['EX'] = 'EX', -- Ex mode (extended command-line mode)
+  ['SHELL'] = 'SHELL', -- Shell mode
+  ['TERMINAL'] = 'TERMINAL', -- Terminal mode
 }
+local symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' }
 
 return {
   {
@@ -149,7 +150,10 @@ return {
   },
   {
     'nvim-lualine/lualine.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+      "Isrothy/lualine-diagnostic-message",
+    },
     config = function()
       require('lualine').setup {
         options = {
@@ -173,11 +177,6 @@ return {
           },
         },
         sections = {
-          -- lualine_a = {
-          --   function()
-          --     return mode_map[vim.api.nvim_get_mode().mode] or '__'
-          --   end,
-          -- },
           lualine_a = {
             {
               'mode',
@@ -197,7 +196,7 @@ return {
               -- separator = { right = '' },
               tabs_color = {
                 -- Same values as the general color option can be used here.
-                active = 'StatusLine', -- Color for active tab.
+                active = 'StatusLine',     -- Color for active tab.
                 inactive = 'StatusLineNC', -- Color for inactive tab.
               },
             },
@@ -208,7 +207,7 @@ return {
               -- separator = { right = '' },
               windows_color = {
                 -- Same values as the general color option can be used here.
-                active = 'StatusLine', -- Color for active tab.
+                active = 'StatusLine',     -- Color for active tab.
                 inactive = 'StatusLineNC', -- Color for inactive tab.
               },
             },
@@ -226,7 +225,16 @@ return {
             },
             {
               'diagnostics',
-              symbols = { error = ' ', warn = ' ', info = ' ', hint = ' ' },
+              symbols = symbols,
+              line_separator = '·',
+            },
+            {
+              "diagnostic-message",
+              icons = symbols,
+              -- Replace '\n' by the separator
+              line_separator = '·',
+              -- Only show the first line of diagnostic message
+              first_line_only = false,
             },
           },
           lualine_y = {
@@ -288,30 +296,30 @@ return {
       vim.cmd.colorscheme 'cyberdream'
     end,
   },
-  {
-    'folke/noice.nvim',
-    event = 'VeryLazy',
-    opts = {
-      -- add any options here
-      views = {
-        mini = {
-          win_options = {
-            winblend = 0,
-          },
-        },
-      },
-    },
-    dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      'MunifTanjim/nui.nvim',
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      -- {
-      --   'rcarriga/nvim-notify',
-      -- },
-    },
-  },
+  -- {
+  --   'folke/noice.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {
+  --     -- add any options here
+  --     views = {
+  --       mini = {
+  --         win_options = {
+  --           winblend = 0,
+  --         },
+  --       },
+  --     },
+  --   },
+  --   dependencies = {
+  --     -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+  --     'MunifTanjim/nui.nvim',
+  --     -- OPTIONAL:
+  --     --   `nvim-notify` is only needed, if you want to use the notification view.
+  --     --   If not available, we use `mini` as the fallback
+  --     -- {
+  --     --   'rcarriga/nvim-notify',
+  --     -- },
+  --   },
+  -- },
   {
     'shellRaining/hlchunk.nvim',
     event = { 'BufReadPre', 'BufNewFile' },
@@ -354,13 +362,13 @@ return {
       'nvim-lua/plenary.nvim',
     },
   },
-  {
-    'smoka7/hop.nvim',
-    version = '*',
-    opts = {
-      keys = 'etovxqpdygfblzhckisuran',
-    },
-  },
+  -- {
+  --   'smoka7/hop.nvim',
+  --   version = '*',
+  --   opts = {
+  --     keys = 'etovxqpdygfblzhckisuran',
+  --   },
+  -- },
   {
     'pogyomo/winresize.nvim',
   },
@@ -373,13 +381,13 @@ return {
     dependencies = { "folke/snacks.nvim" },
     config = true,
     keys = {
-      { "<leader>a", nil, desc = "AI/Claude Code" },
-      { "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<leader>a",  nil,                              desc = "AI/Claude Code" },
+      { "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
+      { "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
+      { "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
       { "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-      { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-      { "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      { "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>",       desc = "Add current buffer" },
+      { "<leader>as", "<cmd>ClaudeCodeSend<cr>",        mode = "v",                 desc = "Send to Claude" },
       {
         "<leader>as",
         "<cmd>ClaudeCodeTreeAdd<cr>",
@@ -388,7 +396,7 @@ return {
       },
       -- Diff management
       { "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+      { "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
     },
   },
   {
@@ -429,4 +437,21 @@ return {
     "sphamba/smear-cursor.nvim",
     opts = {},
   },
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      -- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+    },
+  },
+  config = function()
+    require("flash").toggle()
+  end,
 }
