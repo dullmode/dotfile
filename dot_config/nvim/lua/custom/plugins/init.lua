@@ -214,6 +214,14 @@ return {
           },
           lualine_x = {
             {
+              "diagnostic-message",
+              icons = symbols,
+              -- Replace '\n' by the separator
+              line_separator = '·',
+              -- Only show the first line of diagnostic message
+              first_line_only = false,
+            },
+            {
               lsp_names,
               separator = '·',
             },
@@ -227,14 +235,6 @@ return {
               'diagnostics',
               symbols = symbols,
               line_separator = '·',
-            },
-            {
-              "diagnostic-message",
-              icons = symbols,
-              -- Replace '\n' by the separator
-              line_separator = '·',
-              -- Only show the first line of diagnostic message
-              first_line_only = false,
             },
           },
           lualine_y = {
@@ -441,17 +441,19 @@ return {
     "folke/flash.nvim",
     event = "VeryLazy",
     ---@type Flash.Config
-    opts = {},
+    ---@diagnostic disable-next-line: missing-fields
+    opts = {
+      modes = {
+        search = { enabled = true }
+      }
+    },
     -- stylua: ignore
     keys = {
       { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
       { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
       { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
       { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      -- { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
-  config = function()
-    require("flash").toggle()
-  end,
 }
