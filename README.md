@@ -12,13 +12,6 @@ My dotfiles managed by [chezmoi](https://chezmoi.io) ⚡
   - `sudo apt-get install build-essential`
   - venv for mason (python)
   - `sudo apt install -y python3-venv`
-- 🚀 **volta**
-  - node
-  - `volta install node`
-  - claude
-  - `npm install -g @anthropic-ai/claude-code`
-  - markdown
-  - `dull@AX24026:~/.local/share/nvim/lazy/markdown-preview.nvim$ npm install`
 
 ## Not requirements ⚠️
 - 🎨 nvim config file
@@ -33,6 +26,22 @@ use mason and install these lsp, formatter, and linter
 
 init zk
  - zk init notes
+
+wezterm and zsh
+ - zsh (if needed)
+ - `sudo apt-get update -y` 
+ - wezterm and zsh (if needed)
+ - you may need symlink if you use windows
+ - `mklink wezterm.lua "\\wsl$\Ubuntu\home\xxxxx\.config\wezterm\wezterm.lua"`
+
+npm libraries
+- 🚀 **volta**
+- node
+- `volta install node`
+- claude (if needed)
+- `npm install -g @anthropic-ai/claude-code`
+- markdown(if needed, in the dir)
+- `xxx:~/.local/share/nvim/lazy/markdown-preview.nvim$ npm install`
 
 ## Usage 🔧  
 ```bash

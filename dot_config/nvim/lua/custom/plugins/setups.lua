@@ -201,4 +201,7 @@ vim.api.nvim_create_autocmd("User", {
 
 alpha.setup(dashboard.opts)
 
+require("auto-session").setup {
+  bypass_save_filetypes = { "alpha", "dashboard" }, -- or whatever dashboard you use
+}
 return {}
