@@ -1,70 +1,131 @@
 # Dotfiles 🏠
 
-## About ℹ️ 
+## About i️ 
 My dotfiles managed by [chezmoi](https://chezmoi.io) ⚡
 
 ## Requirements ✅
-- 💻 **chezmoi**
+-  **chezmoi**
   - Detailed description is in Usage
-- 🎨 **nvim**
-  - Download nightly from site and create symbolic to local/bin
+-  **nvim**
+  - Download nightly under `~/.local/bin` from the site
   - gcc for nvim-treesitter
   - `sudo apt-get install build-essential`
   - venv for mason (python)
   - `sudo apt install -y python3-venv`
 
-## Not requirements ⚠️
-- 🎨 nvim config file
-- 🖥️ bashrc
-- 🔎 rg
-- 🔎 zk
+## Quickstart ⚡
 
-## after nvim setting reccomandtion
-use mason and install these lsp, formatter, and linter
- - python
- - zk
+### nvim 🔥
 
-init zk
- - zk init notes
-
-wezterm and zsh
- - zsh (if needed)
- - `sudo apt-get update -y` 
- - wezterm and zsh (if needed)
- - you may need symlink if you use windows
- - `mklink wezterm.lua "\\wsl$\Ubuntu\home\xxxxx\.config\wezterm\wezterm.lua"`
-
-npm libraries
-- 🚀 **volta**
-- node
-- `volta install node`
-- claude (if needed)
-- `npm install -g @anthropic-ai/claude-code`
-- markdown(if needed, in the dir)
-- `xxx:~/.local/share/nvim/lazy/markdown-preview.nvim$ npm install`
-
-## Usage 🔧  
 ```bash
-# Install chezmoi 📥
+
+mkdir -p ~/.local/bin
+
+# Download the tarball for x86_64 (adjust version if newer)
+wget -O ~/nvim-linux-x86_64.tar.gz \
+  https://github.com/neovim/neovim/releases/download/v0.11.5/nvim-linux-x86_64.tar.gz
+
+tar -xzf ~/nvim-linux-x86_64.tar.gz -C ~/
+
+mv ~/nvim-linux-x86_64/bin/nvim ~/.local/bin/nvim
+
+
+chmod +x ~/.local/bin/nvim
+
+rm ~/nvim-linux-x86_64.tar.gz
+
+nvim --version
+```
+
+### chezmoi 🏠
+```bash
+# Install chezmoi
 sh -c "$(curl -fsLS get.chezmoi.io)"
 
-# clone and deploy 🎯
+# clone and deploy
+chezmoi init http://github.com/dullmode/dotfile/
+
+# make sure the repo is latest
+chezmoi cd && git pull
+
+# apply chezmoi 
+chezmoi apply
+```
+
+and install formatter, lsp, linter by mason
+
+## additional libraries 📚
+
+### zsh, ripgrep 🔍
+
+```bash
+sudo apt update
+
+# zsh
+sudo apt install -y zsh
+zsh --version
+
+# ripgrep
+sudo apt install -y ripgrep
+rg --version
+```
+
+### zk 📝
+```bash
+mkdir -p ~/.local/bin
+
+# Download the amd64 tar.gz (adjust version if newer)
+wget -O ~/zk-v0.15.1-linux-amd64.tar.gz \
+  https://github.com/zk-org/zk/releases/download/v0.15.1/zk-v0.15.1-linux-amd64.tar.gz
+
+tar -xzf ~/zk-v0.15.1-linux-amd64.tar.gz -C ~/
+
+chmod +x ~/.local/bin/zk
+
+rm ~/zk-v0.15.1-linux-amd64.tar.gz   
+
+zk --version
+```
+
+### claude, markdown 🤖
+
+```bash
+volta install node
+
+# claude
+npm install -g @anthropic-ai/claude-code
+
+# markdown
+cd ~/.local/share/nvim/lazy/markdown-preview.nvim
+npm install
+```
+
+### wezterm 💻
+- you may need a symlink if you use windows
+- `mklink wezterm.lua "\\wsl$\Ubuntu\home\xxxxx\.config\wezterm\wezterm.lua"`
+
+## Usage 🚀
+```bash
+# Install chezmoi 
+sh -c "$(curl -fsLS get.chezmoi.io)"
+
+# clone and deploy 
 chezmoi init git@github.com:johnmanjiro13/dotfiles.git
 
 # when you wanna add file to dotfile ➕
 chezmoi add ~/.bashrc
 
-# when you wanna edit file 📝
+# when you wanna edit file
 chezmoi edit ~/.bashrc
 # or
 chezmoi cd && nvim
 
-# apply chezmoi changes to home directory 🔄
+# apply chezmoi changes to home directory
 chezmoi apply ~/.zshrc
 # or apply all
 chezmoi apply
 
-# do not forget to push chezmoi changes! 📡
+# do not forget to push chezmoi changes!
 chezmoi cd
 git add .
 git commit -m ""
