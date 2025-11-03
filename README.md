@@ -89,6 +89,11 @@ chmod +x ~/.local/bin/zk
 rm ~/zk-v0.15.1-linux-amd64.tar.gz   
 
 zk --version
+
+# load and create notes
+zk init ~/notes
+
+zk new "My First Note"
 ```
 
 ### claude, markdown 🤖
