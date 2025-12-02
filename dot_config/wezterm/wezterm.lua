@@ -6,28 +6,36 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
--- color_scheme = 'Catppuccin Mocha',
+config.color_scheme = 'Sakura'
 config.window_background_opacity = 0.8
+config.win32_system_backdrop = "Acrylic"
+
+-- Override background color to make it darker
+config.colors = {
+	background = '#0a0a0a',
+}
+
 config.font_size = 9
+config.leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 1000 }
 config.keys = {
 	{
 		key = 'r',
-		mods = 'CTRL|SHIFT',
+		mods = 'LEADER',
 		action = wezterm.action.ReloadConfiguration,
 	},
 	{
 		key = 'h',
-		mods = 'CTRL|SHIFT',
+		mods = 'LEADER',
 		action = wezterm.action.ActivateTabRelative(-1),
 	},
 	{
 		key = 'l',
-		mods = 'CTRL|SHIFT',
+		mods = 'LEADER',
 		action = wezterm.action.ActivateTabRelative(1),
 	},
 	{
-		key = 't',
-		mods = 'CTRL|SHIFT',
+		key = 'n',
+		mods = 'LEADER',
 		action = wezterm.action.PromptInputLine {
 			description = 'Enter new name for tab',
 			action = wezterm.action_callback(function(window, pane, line)
@@ -38,11 +46,24 @@ config.keys = {
 		},
 	},
 	{
+		key = 'c',
+		mods = 'LEADER',
+		action = wezterm.action.CopyTo 'Clipboard',
+	},
+	{
+		key = 'v',
+		mods = 'LEADER',
+		action = wezterm.action.PasteFrom 'Clipboard',
+	},
+	{
+		key = 't',
+		mods = 'LEADER',
+		action = wezterm.action.SpawnTab 'CurrentPaneDomain',
+	},
+	{
 		-- for claude code
 		key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\n")
 	},
-
-
 }
 
 return config
