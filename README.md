@@ -69,8 +69,9 @@ zsh --version
 sudo apt install -y ripgrep
 rg --version
 
-# additional package: uv
+# additional package: uv libraries
 curl -Ls https://astral.sh/uv/install.sh | bash
+uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
 ```
 
 ### zk 📝
