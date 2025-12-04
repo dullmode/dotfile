@@ -68,6 +68,9 @@ zsh --version
 # ripgrep
 sudo apt install -y ripgrep
 rg --version
+
+# additional package: uv
+curl -Ls https://astral.sh/uv/install.sh | bash
 ```
 
 ### zk 📝
