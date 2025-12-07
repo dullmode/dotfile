@@ -46,6 +46,7 @@ keymap.set(
 )
 
 keymap.set('n', '<leader>tm', ':MarkdownPreviewToggle<CR>', { desc = 'Toggle [M]arkdown preview' })
+keymap.set('n', '<leader>ts', ':SwaggerPreviewToggle<CR>', { desc = 'Toggle [S]wagger preview' })
 
 wk.add {
   { '<leader>l', group = '[L]og' },
