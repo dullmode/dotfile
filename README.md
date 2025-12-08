@@ -72,6 +72,10 @@ rg --version
 # additional package: uv libraries
 curl -Ls https://astral.sh/uv/install.sh | bash
 uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
+
+# claude code notification
+# https://zenn.dev/hatappo/articles/8e086ca380cf87
+sudo apt install espeak-ng                               
 ```
 
 ### zk 📝

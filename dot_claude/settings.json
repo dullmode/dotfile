@@ -11,5 +11,29 @@
     ],
     "deny": []
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Please check your Claude Code!'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Please give instructions to your Claude Code!'"
+          }
+        ]
+      }
+    ]
+  },
 }
