@@ -152,7 +152,6 @@ return {
     'nvim-lualine/lualine.nvim',
     dependencies = {
       'nvim-tree/nvim-web-devicons',
-      "Isrothy/lualine-diagnostic-message",
     },
     config = function()
       require('lualine').setup {
@@ -213,14 +212,6 @@ return {
             },
           },
           lualine_x = {
-            {
-              "diagnostic-message",
-              icons = symbols,
-              -- Replace '\n' by the separator
-              line_separator = '·',
-              -- Only show the first line of diagnostic message
-              first_line_only = false,
-            },
             {
               lsp_names,
               separator = '·',
@@ -468,4 +459,23 @@ return {
     build = "npm i",
     config = true,
   },
+{
+    "rachartier/tiny-inline-diagnostic.nvim",
+    event = "VeryLazy",
+    priority = 1000,
+    config = function()
+      require("tiny-inline-diagnostic").setup({
+      preset = "simple",
+        options = {
+          add_messages = {
+              display_count = true,
+          },
+          multilines = {
+              enabled = true,
+          },
+        },
+      })
+      vim.diagnostic.config({ virtual_text = false }) -- Disable Neovim's default virtual text diagnostics
+    end,
+  }
 }
