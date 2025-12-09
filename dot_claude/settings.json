@@ -13,28 +13,8 @@
   },
   "alwaysThinkingEnabled": true,
   "hooks": {
-    "PreToolUse": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Tool starting'"
-          }
-        ]
-      }
-    ],
-    "PostToolUse": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Tool finished'"
-          }
-        ]
-      }
-    ],
+    "PreToolUse": [],
+    "PostToolUse": [],
     "Notification": [
       {
         "matcher": "",
