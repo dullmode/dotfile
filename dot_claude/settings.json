@@ -19,7 +19,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Tool starting'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Tool starting'"
           }
         ]
       }
@@ -30,7 +30,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Tool finished'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Tool finished'"
           }
         ]
       }
@@ -41,7 +41,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Check notification'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Check notification'"
           }
         ]
       }
@@ -52,7 +52,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Prompt submitted'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Prompt submitted'"
           }
         ]
       }
@@ -63,7 +63,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Task stopped'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Task stopped'"
           }
         ]
       }
@@ -74,7 +74,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Subagent stopped'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Subagent stopped'"
           }
         ]
       }
@@ -85,7 +85,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Compacting context'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Compacting context'"
           }
         ]
       }
@@ -96,7 +96,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Session started'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Session started'"
           }
         ]
       }
@@ -107,7 +107,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f4 -p 120 -s 150 -a 10 'Session ended'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Session ended'"
           }
         ]
       }
