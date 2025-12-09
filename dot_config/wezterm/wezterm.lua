@@ -6,14 +6,8 @@ if wezterm.config_builder then
 	config = wezterm.config_builder()
 end
 
-config.color_scheme = 'Sakura'
-config.window_background_opacity = 0.8
-config.win32_system_backdrop = "Acrylic"
-
--- Override background color to make it darker
-config.colors = {
-	background = '#0a0a0a',
-}
+config.color_scheme = 'Shaman'
+config.window_background_opacity = 0.95
 
 config.font_size = 9
 config.leader = { key = 'q', mods = 'CTRL', timeout_milliseconds = 1000 }

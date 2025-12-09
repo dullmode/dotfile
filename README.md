@@ -114,8 +114,10 @@ npm install
 ```
 
 ### wezterm 💻
-- you may need a symlink if you use windows
-- `mklink wezterm.lua "\\wsl$\Ubuntu\home\xxxxx\.config\wezterm\wezterm.lua"`
+you may need a symlink if you use windows
+```bash
+mklink wezterm.lua "\\wsl$\Ubuntu\home\xxxxx\.config\wezterm\wezterm.lua"
+```
 
 ## Usage 🚀
 ```bash
