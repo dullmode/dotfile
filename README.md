@@ -65,6 +65,10 @@ sudo apt update
 sudo apt install -y zsh
 zsh --version
 
+# zsh - starship
+curl -sS https://starship.rs/install.sh | sh
+starship --version
+
 # ripgrep
 sudo apt install -y ripgrep
 rg --version
