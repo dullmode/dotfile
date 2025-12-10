@@ -45,6 +45,30 @@ keymap.set(
   { noremap = true, silent = true, desc = '[Y]ank fullpath' }
 )
 
+local function yank_path_with_lines_visual()
+  local filepath = vim.fn.expand('%:p')
+  local start_line = vim.fn.line('v')
+  local end_line = vim.fn.line('.')
+
+  -- Ensure start_line is less than end_line
+  if start_line > end_line then
+    start_line, end_line = end_line, start_line
+  end
+
+  local result
+  if start_line == end_line then
+    result = string.format('%s#L%d', filepath, start_line)
+  else
+    result = string.format('%s#L%d-%d', filepath, start_line, end_line)
+  end
+
+  vim.fn.setreg('+', result)
+  print('yanked: ' .. result)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', true)
+end
+
+keymap.set('v', '<leader>y', yank_path_with_lines_visual, { noremap = true, silent = true, desc = '[Y]ank fullpath with lines' })
+
 keymap.set('n', '<leader>tm', ':MarkdownPreviewToggle<CR>', { desc = 'Toggle [M]arkdown preview' })
 keymap.set('n', '<leader>ts', ':SwaggerPreviewToggle<CR>', { desc = 'Toggle [S]wagger preview' })
 
