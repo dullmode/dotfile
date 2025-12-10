@@ -14,7 +14,17 @@
   "alwaysThinkingEnabled": true,
   "hooks": {
     "PreToolUse": [],
-    "PostToolUse": [],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Tool finished'"
+          }
+        ]
+      }
+    ],
     "Notification": [
       {
         "matcher": "",
