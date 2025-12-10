@@ -21,7 +21,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Check notification'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Check notification'"
           }
         ]
       }
@@ -32,7 +32,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Prompt submitted'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Prompt submitted'"
           }
         ]
       }
@@ -43,7 +43,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Task stopped'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Task stopped'"
           }
         ]
       }
@@ -54,7 +54,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Subagent stopped'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Subagent stopped'"
           }
         ]
       }
@@ -65,7 +65,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Compacting context'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Compacting context'"
           }
         ]
       }
@@ -76,7 +76,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Session started'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Session started'"
           }
         ]
       }
@@ -87,7 +87,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 10 'Session ended'"
+            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Session ended'"
           }
         ]
       }
