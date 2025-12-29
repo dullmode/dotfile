@@ -20,7 +20,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Tool finished'"
+            "command": "espeak-ng -v en+f1 -p 1000 'Tool finished'"
           }
         ]
       }
@@ -31,7 +31,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Check notification'"
+            "command": "espeak-ng -v en+f1 -p 1000 'Check notification'"
           }
         ]
       }
@@ -42,7 +42,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Prompt submitted'"
+            "command": "espeak-ng -v en+f1 -p 1000 'Prompt submitted'"
           }
         ]
       }
@@ -53,7 +53,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Task stopped'"
+            "command": "espeak-ng -v en+f1 -p 1000 'Task stopped'"
           }
         ]
       }
@@ -64,7 +64,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Subagent stopped'"
+            "command": "espeak-ng -v en+f1 -p 1000 'Subagent stopped'"
           }
         ]
       }
@@ -75,7 +75,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Compacting context'"
+            "command": "espeak-ng -v en+f1 -p 1000 'Compacting context'"
           }
         ]
       }
@@ -86,7 +86,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Session started'"
+            "command": "espeak-ng -v en+f1 -p 1000 'Session started'"
           }
         ]
       }
@@ -97,7 +97,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "/usr/bin/espeak-ng -v en+f1 -p 1000 -a 5 'Session ended'"
+            "command": "espeak-ng -v en+f1 -p 1000 'Session ended'"
           }
         ]
       }
