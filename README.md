@@ -117,6 +117,16 @@ cd ~/.local/share/nvim/lazy/markdown-preview.nvim
 npm install
 ```
 
+### MCP Servers 🔌
+
+Model Context Protocol (MCP) servers extend Claude Code with additional capabilities.
+
+**Available MCP configurations:**
+- [VOICEVOX](docs/mcp_voicebox.md) - Japanese text-to-speech
+- [GitHub](docs/mcp_github.md.tmpl) - GitHub integration (issues, PRs, repos)
+
+See individual docs for setup instructions.
+
 ### wezterm 💻
 you may need a symlink if you use windows
 ```bash
