@@ -1,22 +1,26 @@
 # Dotfiles 🏠
 
-## About i️ 
+## About 
 My dotfiles managed by [chezmoi](https://chezmoi.io) ⚡
 
 ## Requirements ✅
 -  **chezmoi**
   - Detailed description is in Usage
--  **nvim**
-  - Download nightly under `~/.local/bin` from the site
-  - gcc for nvim-treesitter
-  - `sudo apt-get install build-essential`
-  - venv for mason (python)
-  - `sudo apt install -y python3-venv`
-
-## Quickstart ⚡
+-  **LazyVim**
+  - Neovim >= 0.11.2 (needs to be built with LuaJIT)
+  - Git >= 2.19.0 (for partial clones support)
+  - a Nerd Font(v3.0 or greater) (optional, but needed to display some icons)
+  - lazygit (optional)
+  - tree-sitter-cli and a C compiler for nvim-treesitter. See here
+  - curl for blink.cmp (completion engine)
+  - for fzf-lua (optional)
+  - - fzf: fzf (v0.25.1 or greater)
+  - - live grep: ripgrep
+  - - find files: fd
+  - a terminal that support true color and undercurl:
+  - - wezterm (Linux, Macos & Windows)
 
 ### nvim 🔥
-
 ```bash
 
 mkdir -p ~/.local/bin
@@ -29,12 +33,22 @@ tar -xzf ~/nvim-linux-x86_64.tar.gz -C ~/
 
 mv ~/nvim-linux-x86_64/bin/nvim ~/.local/bin/nvim
 
-
 chmod +x ~/.local/bin/nvim
 
 rm ~/nvim-linux-x86_64.tar.gz
 
 nvim --version
+```
+
+### lazygit 🌳
+```bash
+LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+curl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"
+tar xf lazygit.tar.gz lazygit
+sudo install lazygit /usr/local/bin
+rm lazygit lazygit.tar.gz
+
+lazygit --version
 ```
 
 ### chezmoi 🏠
@@ -43,7 +57,7 @@ nvim --version
 sh -c "$(curl -fsLS get.chezmoi.io)"
 
 # clone and deploy
-chezmoi init http://github.com/dullmode/dotfile/
+chezmoi init https://github.com/dullmode/dotfiles
 
 # make sure the repo is latest
 chezmoi cd && git pull
@@ -53,8 +67,6 @@ chezmoi apply
 ```
 
 and install formatter, lsp, linter by mason
-
-## additional libraries 📚
 
 ### zsh, ripgrep 🔍
 
@@ -69,39 +81,6 @@ zsh --version
 curl -sS https://starship.rs/install.sh | sh
 starship --version
 
-# ripgrep
-sudo apt install -y ripgrep
-rg --version
-
-# additional package: uv libraries
-curl -Ls https://astral.sh/uv/install.sh | bash
-uv tool install specify-cli --from git+https://github.com/github/spec-kit.git
-
-# claude code notification
-# https://zenn.dev/hatappo/articles/8e086ca380cf87
-sudo apt install espeak-ng                               
-```
-
-### zk 📝
-```bash
-mkdir -p ~/.local/bin
-
-# Download the amd64 tar.gz (adjust version if newer)
-wget -O ~/zk-v0.15.1-linux-amd64.tar.gz \
-  https://github.com/zk-org/zk/releases/download/v0.15.1/zk-v0.15.1-linux-amd64.tar.gz
-
-tar -xzf ~/zk-v0.15.1-linux-amd64.tar.gz -C ~/
-
-chmod +x ~/.local/bin/zk
-
-rm ~/zk-v0.15.1-linux-amd64.tar.gz   
-
-zk --version
-
-# load and create notes
-zk init ~/notes
-
-zk new "My First Note"
 ```
 
 ### claude, markdown 🤖
@@ -117,29 +96,13 @@ cd ~/.local/share/nvim/lazy/markdown-preview.nvim
 npm install
 ```
 
-### MCP Servers 🔌
-
-Model Context Protocol (MCP) servers extend Claude Code with additional capabilities.
-
-**Available MCP configurations:**
-- [VOICEVOX](docs/mcp_voicebox.md) - Japanese text-to-speech
-- [GitHub](docs/mcp_github.md.tmpl) - GitHub integration (issues, PRs, repos)
-
-See individual docs for setup instructions.
-
-### wezterm 💻
-you may need a symlink if you use windows
-```bash
-mklink wezterm.lua "\\wsl$\Ubuntu\home\xxxxx\.config\wezterm\wezterm.lua"
-```
-
 ## Usage 🚀
 ```bash
 # Install chezmoi 
 sh -c "$(curl -fsLS get.chezmoi.io)"
 
-# clone and deploy 
-chezmoi init git@github.com:johnmanjiro13/dotfiles.git
+# clone and deploy
+chezmoi init git@github.com:dullmode/dotfiles.git
 
 # when you wanna add file to dotfile ➕
 chezmoi add ~/.bashrc
