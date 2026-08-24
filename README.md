@@ -12,8 +12,8 @@ sh -c "$(curl -fsLS get.chezmoi.io) -- init --apply dullmode"
 
 ## Usage 🚀
 ```bash
-# when you wanna add file to dotfile ➕
-chezmoi add ~/.bashrc
+# syncs the chezmoi source from actual file
+ckezmoi add ~/.config/nvim
 
 # apply chezmoi changes to home directory
 chezmoi apply ~/.zshrc
@@ -21,3 +21,4 @@ chezmoi apply ~/.zshrc
 chezmoi apply
 # or refresh all
 chezmoi apply --init --refresh-externals
+```
