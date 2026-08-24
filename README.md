@@ -13,7 +13,7 @@ sh -c "$(curl -fsLS get.chezmoi.io) -- init --apply dullmode"
 ## Usage 🚀
 ```bash
 # syncs the chezmoi source from actual file
-ckezmoi add ~/.config/nvim
+chezmoi add ~/.config/nvim
 
 # apply chezmoi changes to home directory
 chezmoi apply ~/.zshrc
